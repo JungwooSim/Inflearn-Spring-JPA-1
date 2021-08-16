@@ -5,25 +5,42 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "orders")
-class Order (
+class Order(member: Member, orderItems: ArrayList<OrderItem>, delivery: Delivery, localDateTime: LocalDateTime, status: OrderStatus) {
     @Id
     @GeneratedValue
     @Column(name = "order_id")
-    val id: Long = 0,
+    var id: Long = 0
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    val member: Member,
+    var member: Member = member
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
-    val orderItems: List<OrderItem>,
+    var orderItems: ArrayList<OrderItem> = orderItems
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
-    val delivery: Delivery,
+    var delivery: Delivery = delivery
 
-    val localDateTime: LocalDateTime,
+    var localDateTime: LocalDateTime = localDateTime
 
     @Enumerated(EnumType.STRING)
-    val status: OrderStatus
-)
+    var status: OrderStatus = status
+
+    //==연관관계 메서드==//
+    fun changeMember(member: Member) {
+        this.member = member
+        member.orders.add(this)
+    }
+
+    //==연관관계 메서드==//
+    fun addOrderItem(orderItem: OrderItem) {
+        orderItems.add(orderItem)
+        orderItem.order = this
+    }
+
+    fun changeDelivery(delivery: Delivery) {
+        this.delivery = delivery
+        delivery.order = this
+    }
+}

@@ -6,14 +6,13 @@ import javax.persistence.*
 class Delivery(
     @Id @GeneratedValue
     @Column(name = "delivery_id")
-    val id: Long,
+    var id: Long,
 
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
-    val order: Order,
+    var order: Order,
 
     @Embedded
-    val address: Address,
+    var address: Address,
 
-
-    val status: DeliveryStatus
+    var status: DeliveryStatus
 )

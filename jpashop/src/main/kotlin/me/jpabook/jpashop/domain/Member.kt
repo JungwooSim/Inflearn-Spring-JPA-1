@@ -7,15 +7,15 @@ class Member(
     @Id
     @GeneratedValue
     @Column(name = "member_id")
-    val id: Long = 0,
+    var id: Long = 0,
 
-    val name: String,
+    var name: String,
 
     @Embedded
-    val address: Address,
+    var address: Address,
 
     @OneToMany(mappedBy = "member")
-    val orders: List<Order>
+    val orders: ArrayList<Order> = ArrayList()
 )
 
 

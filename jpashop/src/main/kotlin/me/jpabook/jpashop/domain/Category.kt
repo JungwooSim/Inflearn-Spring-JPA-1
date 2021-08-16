@@ -8,9 +8,9 @@ class Category(
     @Id
     @GeneratedValue
     @Column(name = "category_id")
-    val id: Long = 0,
+    var id: Long = 0,
 
-    val name: String,
+    var name: String,
 
     @ManyToMany
     @JoinTable(
@@ -18,12 +18,17 @@ class Category(
         joinColumns = [JoinColumn(name = "cateogry_id")],
         inverseJoinColumns = [JoinColumn(name = "item_id")]
     )
-    val items: List<Item>,
+    var items: ArrayList<Item> = arrayListOf(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    val parent: Category,
+    var parent: Category,
 
     @OneToMany(mappedBy = "parent")
-    val child: List<Category>
-)
+    var child: ArrayList<Category> = arrayListOf()
+) {
+    fun addChildCategory(child: Category) {
+        this.child.add(child)
+        child.parent = child
+    }
+}
