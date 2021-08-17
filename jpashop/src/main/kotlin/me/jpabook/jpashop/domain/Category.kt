@@ -18,14 +18,14 @@ class Category(
         joinColumns = [JoinColumn(name = "cateogry_id")],
         inverseJoinColumns = [JoinColumn(name = "item_id")]
     )
-    var items: ArrayList<Item> = arrayListOf(),
+    var items: MutableList<Item> = ArrayList(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     var parent: Category,
 
     @OneToMany(mappedBy = "parent")
-    var child: ArrayList<Category> = arrayListOf()
+    var child: MutableList<Category> = ArrayList()
 ) {
     fun addChildCategory(child: Category) {
         this.child.add(child)

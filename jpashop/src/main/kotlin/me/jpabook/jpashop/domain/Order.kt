@@ -16,7 +16,7 @@ class Order(member: Member, orderItems: ArrayList<OrderItem>, delivery: Delivery
     var member: Member = member
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
-    var orderItems: ArrayList<OrderItem> = orderItems
+    var orderItems: MutableList<OrderItem> = orderItems
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
