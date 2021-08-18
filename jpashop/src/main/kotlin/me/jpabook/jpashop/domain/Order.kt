@@ -5,7 +5,13 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "orders")
-class Order(member: Member, orderItems: MutableList<OrderItem>, delivery: Delivery, localDateTime: LocalDateTime, status: OrderStatus) {
+class Order(
+    member: Member,
+    orderItems: MutableList<OrderItem>,
+    delivery: Delivery,
+    localDateTime: LocalDateTime = LocalDateTime.now(),
+    status: OrderStatus = OrderStatus.ORDER) {
+
     @Id
     @GeneratedValue
     @Column(name = "order_id")
@@ -45,15 +51,15 @@ class Order(member: Member, orderItems: MutableList<OrderItem>, delivery: Delive
     }
 
     // 생성 메서드
-    fun createOrder(member: Member, delivery: Delivery, orderItems: MutableList<OrderItem>) {
-        val order = Order(
-            member = member,
-            delivery = delivery,
-            orderItems = orderItems,
-            status = OrderStatus.ORDER,
-            localDateTime = LocalDateTime.now()
-        )
-    }
+//    fun createOrder(member: Member, delivery: Delivery, orderItems: MutableList<OrderItem>) {
+//        val order = Order(
+//            member = member,
+//            delivery = delivery,
+//            orderItems = orderItems,
+//            status = OrderStatus.ORDER,
+//            localDateTime = LocalDateTime.now()
+//        )
+//    }
 
     // 주문 취소
     fun cancel() {

@@ -7,12 +7,12 @@ class Member(
     @Id
     @GeneratedValue
     @Column(name = "member_id")
-    var id: Long = 0,
+    var id: Long? = null,
 
     var name: String,
 
     @Embedded
-    var address: Address? = null,
+    var address: Address,
 
     @OneToMany(mappedBy = "member")
     val orders: MutableList<Order> = ArrayList()

@@ -5,29 +5,25 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "order_item")
-class OrderItem(
+class OrderItem(id: Long? = null, item: Item, orderPrice: Int, count: Int) {
     @Id @GeneratedValue
     @Column(name = "order_item_id")
-    var id: Long? = null,
+    val id: Long? = id
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    var item: Item,
+    val item: Item = item
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    var order: Order? = null,
+    var order: Order? = null
 
-    var orderPrice: Int,
+    val orderPrice: Int = orderPrice
 
-    var count: Int) {
+    val count: Int = count
 
-    fun createOrderItem(item: Item, orderPrice: Int, count: Int): OrderItem {
-        val orderItem = OrderItem(item = item, orderPrice = orderPrice, count = count)
-
+    fun createOrderItem() {
         item.removeStock(count)
-
-        return orderItem
     }
 
     // 주문 취소
