@@ -1,6 +1,7 @@
 package me.jpabook.jpashop.domain.item
 
 import me.jpabook.jpashop.domain.Category
+import me.jpabook.jpashop.exception.NotEnoughStockException
 import javax.persistence.*
 
 @Entity
@@ -15,8 +16,23 @@ open abstract class Item(
 
     val price: Int,
 
-    val stockQuantity: Int,
+    var stockQuantity: Int,
 
     @ManyToMany(mappedBy = "items")
-    val categories: List<Category>
-)
+    val categories: List<Category>) {
+
+    //==비즈니스 로직==//
+    fun addStock(quantity: Int) {
+        this.stockQuantity += quantity
+    }
+
+    fun removeStock(quantity: Int) {
+        val restStock: Int = this.stockQuantity - quantity
+
+        if (restStock < 0) {
+            throw NotEnoughStockException("need more stock")
+        }
+
+        this.stockQuantity = restStock
+    }
+}
