@@ -10,7 +10,7 @@ import javax.persistence.*
 open abstract class Item(
     @Id @GeneratedValue
     @Column(name = "item_id")
-    val id: Long = 0,
+    val id: Long? = null,
 
     val name: String,
 
