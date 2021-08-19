@@ -24,7 +24,7 @@ class OrderService(
         val item: Item = itemRepository.findOne(itemId)
 
         // 배송정보 생성
-        val delivery = Delivery(address = member.address, status = DeliveryStatus.READY)
+        val delivery = Delivery(address = member.address!!, status = DeliveryStatus.READY)
 
         // 주문상품 생성
         val orderItem= OrderItem(item = item, orderPrice = item.price, count = count)
@@ -42,8 +42,8 @@ class OrderService(
     // 주문 취소
     @Transactional
     fun cancelOrder(orderId: Long) {
-        val order: Order = orderRepository.findOne(orderId)
+        val order: Order? = orderRepository.findOne(orderId)
 
-        order.cancel()
+        order?.cancel()
     }
 }

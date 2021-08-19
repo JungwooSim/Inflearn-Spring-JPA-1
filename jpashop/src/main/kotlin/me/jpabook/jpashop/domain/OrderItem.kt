@@ -33,6 +33,6 @@ class OrderItem(id: Long? = null, item: Item, orderPrice: Int, count: Int) {
 
     // 주문상품 전체 가격 조회
     fun getTotalPrice(): Int {
-        return orderPrice * count
+        return this.orderPrice * this.count
     }
 }

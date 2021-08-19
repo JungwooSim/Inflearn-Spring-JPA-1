@@ -12,8 +12,8 @@ class Member(
     var name: String,
 
     @Embedded
-    var address: Address,
+    var address: Address? = null,
 
     @OneToMany(mappedBy = "member")
-    val orders: MutableList<Order> = ArrayList()
+    val orders: MutableList<Order> = mutableListOf()
 )

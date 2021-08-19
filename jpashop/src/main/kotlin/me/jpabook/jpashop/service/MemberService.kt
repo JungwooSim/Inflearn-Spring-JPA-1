@@ -14,7 +14,7 @@ class MemberService(@Autowired val memberRepository: MemberRepository) {
      * 회원 가입
      */
     @Transactional
-    fun join(member: Member): Long {
+    fun join(member: Member): Long? {
         validateDuplicateMember(member)
         memberRepository.save(member)
         return member.id

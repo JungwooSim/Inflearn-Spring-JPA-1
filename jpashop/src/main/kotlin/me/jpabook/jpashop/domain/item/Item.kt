@@ -7,19 +7,19 @@ import javax.persistence.*
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-open abstract class Item(
+abstract class Item(
     @Id @GeneratedValue
     @Column(name = "item_id")
-    val id: Long? = null,
+    open val id: Long? = null,
 
-    val name: String,
+    open val name: String,
 
-    val price: Int,
+    open val price: Int,
 
-    var stockQuantity: Int,
+    open var stockQuantity: Int,
 
     @ManyToMany(mappedBy = "items")
-    val categories: List<Category>) {
+    val categories: MutableList<Category> = mutableListOf()) {
 
     //==비즈니스 로직==//
     fun addStock(quantity: Int) {

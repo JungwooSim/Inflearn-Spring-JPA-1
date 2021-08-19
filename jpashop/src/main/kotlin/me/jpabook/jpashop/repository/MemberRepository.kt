@@ -12,7 +12,7 @@ class MemberRepository(@PersistenceContext val em: EntityManager) {
         em.persist(member)
     }
 
-    fun findOne(id: Long): Member {
+    fun findOne(id: Long?): Member {
         return em.find(Member::class.java, id)
     }
 

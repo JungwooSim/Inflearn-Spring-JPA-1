@@ -23,7 +23,7 @@ class MemberServiceTest(
         val member = Member(name = "KIM")
 
         //when
-        val saveId: Long = memberService.join(member)
+        val saveId: Long? = memberService.join(member)
 
         //then
         assertEquals(member, memberRepository.findOne(saveId))

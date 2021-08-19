@@ -12,12 +12,12 @@ class OrderRepository(@PersistenceContext val em: EntityManager) {
         em.persist(order)
     }
 
-    fun findOne(id: Long): Order {
+    fun findOne(id: Long?): Order? {
         return em.find(Order::class.java, id)
     }
 
     // 개발 예정
-    fun findAll() {
-
-    }
+//    fun findAll() {
+//
+//    }
 }
