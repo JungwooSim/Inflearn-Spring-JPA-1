@@ -12,11 +12,11 @@ abstract class Item(
     @Column(name = "item_id")
     open val id: Long? = null,
 
-    open val name: String,
+    open val name: String? = null,
 
-    open val price: Int,
+    open val price: Int? = null,
 
-    open var stockQuantity: Int,
+    open var stockQuantity: Int = 0,
 
     @ManyToMany(mappedBy = "items")
     val categories: MutableList<Category> = mutableListOf()) {

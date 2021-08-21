@@ -2,16 +2,15 @@ package me.jpabook.jpashop.domain.item
 
 import javax.persistence.DiscriminatorValue
 import javax.persistence.Entity
-import javax.persistence.Id
 
 @Entity
 @DiscriminatorValue("B")
 class Book(
-    override var name: String,
-    override var price: Int,
-    override var stockQuantity: Int) : Item(name = name, price = price, stockQuantity = stockQuantity){
-    val author: String? = null
-    val isbn: String? = null
-}
+    override var name: String? = null,
+    override var price: Int? = null,
+    override var stockQuantity: Int,
+    var author: String? = null,
+    var isbn: String? = null
+) : Item(name = name, price = price, stockQuantity = stockQuantity)
 
 // name = name, price = price, stockQuantity = stockQuantity, categories = categories

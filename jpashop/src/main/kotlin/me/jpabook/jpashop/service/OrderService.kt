@@ -27,7 +27,7 @@ class OrderService(
         val delivery = Delivery(address = member.address!!, status = DeliveryStatus.READY)
 
         // 주문상품 생성
-        val orderItem= OrderItem(item = item, orderPrice = item.price, count = count)
+        val orderItem= OrderItem(item = item, orderPrice = item.price!!, count = count)
         orderItem.createOrderItem()
 
         // 주문 생성
