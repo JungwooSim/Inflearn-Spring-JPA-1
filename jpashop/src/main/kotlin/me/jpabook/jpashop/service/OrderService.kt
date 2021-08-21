@@ -46,4 +46,8 @@ class OrderService(
 
         order?.cancel()
     }
+
+    fun findOrders(orderSearch: OrderSearch): MutableList<Order> {
+        return orderRepository.findAllByString(orderSearch)
+    }
 }

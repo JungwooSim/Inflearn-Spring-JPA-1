@@ -1,6 +1,8 @@
 package me.jpabook.jpashop.web
 
 import me.jpabook.jpashop.domain.Member
+import me.jpabook.jpashop.domain.Order
+import me.jpabook.jpashop.domain.OrderSearch
 import me.jpabook.jpashop.domain.item.Item
 import me.jpabook.jpashop.service.ItemService
 import me.jpabook.jpashop.service.MemberService
@@ -8,9 +10,7 @@ import me.jpabook.jpashop.service.OrderService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 
 @Controller
 class OrderController(
@@ -34,6 +34,21 @@ class OrderController(
         @RequestParam("count") count: Int
     ): String {
         orderService.order(memberId = memberId, itemId = itemId, count = count)
+        return "redirect:/orders"
+    }
+
+    @GetMapping(value = ["/orders"])
+    fun orderList(
+        @ModelAttribute("oerderSearch") orderSearch: OrderSearch,
+        model: Model): String {
+        val orders: MutableList<Order> = orderService.findOrders(orderSearch)
+        model.addAttribute("orders", orders)
+        return "order/orderList"
+    }
+
+    @PostMapping(value = ["/orders/{orderId}/cancel"])
+    fun cancelOrder(@PathVariable("orderId") orderId: Long): String {
+        orderService.cancelOrder(orderId)
         return "redirect:/orders"
     }
 }

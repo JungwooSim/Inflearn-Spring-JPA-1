@@ -1,6 +1,6 @@
 package me.jpabook.jpashop.domain
 
 class OrderSearch(
-    val memberName: String,
-    val orderStatus: OrderStatus
+    val memberName: String? = "",
+    val orderStatus: OrderStatus = OrderStatus.ORDER
 )
