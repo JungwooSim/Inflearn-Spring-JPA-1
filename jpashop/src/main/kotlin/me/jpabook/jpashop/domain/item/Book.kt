@@ -6,6 +6,7 @@ import javax.persistence.Entity
 @Entity
 @DiscriminatorValue("B")
 class Book(
+    override var id: Long? = null,
     override var name: String? = null,
     override var price: Int? = null,
     override var stockQuantity: Int,
