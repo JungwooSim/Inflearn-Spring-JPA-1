@@ -16,7 +16,7 @@ class MemberRepository(@PersistenceContext val em: EntityManager) {
         return em.find(Member::class.java, id)
     }
 
-    fun findAll(): List<Member> {
+    fun findAll(): MutableList<Member> {
         return em.createQuery("select m from Member m", Member::class.java).resultList // JPQL 사용
     }
 

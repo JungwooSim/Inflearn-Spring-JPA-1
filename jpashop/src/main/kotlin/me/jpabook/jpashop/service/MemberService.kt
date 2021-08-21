@@ -30,7 +30,7 @@ class MemberService(@Autowired val memberRepository: MemberRepository) {
     /**
      * 전체 회원 조회
      */
-    fun findMembers(): List<Member> {
+    fun findMembers(): MutableList<Member> {
         return memberRepository.findAll()
     }
 
